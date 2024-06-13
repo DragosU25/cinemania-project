@@ -75,25 +75,25 @@ const displayWeekMovieInfo = async () => {
 
           let html = `
             <button class="close-btn">X</button>
-            <div class="movie-details-container-content">
+            <div class="trends-movie-details-container-content">
               <img src="https://image.tmdb.org/t/p/original${posterPath}" alt="${selectedMovie.title}">
-              <div class="movie-details">
-                <h3 class="movie-title">${selectedMovie.title}</h3>
-                <div class="movie-info-container">
-                  <div class="movie-info">
-                    <p class="info-title">Vote / Votes</p>
-                    <p><span class="rating-span">${selectedMovie.vote_average}</span> / <span class="rating-span">${selectedMovie.vote_count}</span></p>
+              <div class="trends-movie-details">
+                <h3 class="trends-movie-title">${selectedMovie.title}</h3>
+                <div class="trends-movie-info-container">
+                  <div class="trends-movie-info">
+                    <p class="trends-info-title">Vote / Votes</p>
+                    <p><span class="trends-rating-span">${selectedMovie.vote_average}</span> / <span class="trends-rating-span">${selectedMovie.vote_count}</span></p>
                   </div>
-                  <div class="movie-info">
-                    <p class="info-title">Popularity</p><span>${selectedMovie.popularity}</span>
+                  <div class="trends-movie-info">
+                    <p class="trends-info-title">Popularity</p><span>${selectedMovie.popularity}</span>
                   </div>
-                  <div class="movie-info">
-                    <p class="info-title">Genre</p><span>${genreNames}</span>
+                  <div class="trends-movie-info">
+                    <p class="trends-info-title">Genre</p><span>${genreNames}</span>
                   </div>
                 </div>
-                <div class="about-info">
-                  <p class="info-title">ABOUT</p>
-                  <p class="overview">${selectedMovie.overview}</p>
+                <div class="trends-about-info">
+                  <p class="trends-info-title">ABOUT</p>
+                  <p class="trends-overview">${selectedMovie.overview}</p>
                 </div>
                 <button class="add-to-library-btn">Add to my library</button>
               </div>

@@ -16,8 +16,34 @@
 
 @media (min-width: 768px) {
   .week-movie-card {
-    width: 394px;
-    height: 574px;
+    width: 224px;
+    height: 325px;
+  }
+
+  .week-movie-card h2 {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px; /* 150% */
+    text-transform: uppercase;
+  }
+
+  .week-movie-card p {
+    color: #b7b7b7;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .week-movie-card h2 {
+    font-size: 20px !important;
+  }
+
+  .week-movie-card p {
+    font-size: 20px;
+    margin-top: 8px;
   }
 }
 
@@ -75,4 +101,104 @@
   .section-title {
     font-size: 28px;
   }
+
+  .week-movie-card {
+    width: 394px;
+    height: 574px;
+  }
+}
+
+.trends-movie-details-container-content {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  gap: 22px;
+}
+
+@media (width >= 768px) {
+  .trends-movie-details-container-content {
+    flex-direction: row;
+  }
+
+  .trends-movie-details-container-content img {
+    width: 294px !important;
+    height: 400px !important;
+  }
+
+  .movie-card {
+    padding: 44px;
+  }
+}
+
+@media (width >=1280px) {
+  .trends-movie-details-container-content img {
+    max-width: 375px !important;
+    max-height: 478px !important;
+  }
+
+  .trends-movie-title {
+    font-size: 24px !important;
+  }
+
+  .trends-info-title {
+    font-size: 16px !important;
+  }
+
+  .trends-overview {
+    font-size: 14px !important;
+  }
+}
+
+.trends-movie-details-container-content img {
+  min-width: 248px;
+  min-height: 315px;
+}
+
+.trends-movie-title {
+  font-size: 20px;
+  margin-bottom: 29px;
+}
+
+.trends-movie-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.trends-movie-info span {
+  max-width: 92px;
+}
+
+.trends-info-title {
+  color: #b7b7b7;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.trends-rating-span {
+  padding: 1px 4px;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #000;
+}
+.trends-movie-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trends-about-info span {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.trends-overview {
+  color: #f8f8f8;
+  font-size: 12px;
+  line-height: 20px;
+  margin-top: 12px;
+  margin-bottom: 16px;
 }
