@@ -2,20 +2,20 @@
   "name": "team-project",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://dragosu25.github.io/Cinemania-Team-Project/",
+  "homepage": "https://dragosu25.github.io/Cinemania-Project/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /Cinemania-Team-Project/"
+    "build": "parcel build src/*.html --public-url /Cinemania-Project/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DragosU25/Cinemania-Team-Project.git"
+    "url": "git+https://github.com/DragosU25/Cinemania-Project.git"
   },
   "keywords": [],
   "author": "Dragos Ungureanu <ungureanud6@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DragosU25/Cinemania-Team-Project/issues"
+    "url": "https://github.com/DragosU25/Cinemania-Project/issues"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
