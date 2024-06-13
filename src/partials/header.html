@@ -1,0 +1,41 @@
+<header>
+  <div class="container">
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="./images/logo.svg" alt="Cinemania Logo" class="logo" />
+        <span class="logo-text">Cinemania</span>
+      </div>
+      <button type="button" class="menu-button">Menu</button>
+
+      <nav class="desktop-menu-container is-hidden">
+        <ul class="menu-list desktop-list">
+          <li><a href="../src/index.html" class="menu-link">Home</a></li>
+          <li><a href="../src/catalog.html" class="menu-link">Catalog</a></li>
+          <li>
+            <a href="../src/my-library.html" class="menu-link">My library</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="toggle-switch">
+        <input type="checkbox" id="toggle" class="toggle-input" />
+        <label for="toggle" class="toggle-label">
+          <span class="toggle-icon moon">&#9790;</span>
+          <span class="toggle-icon sun">&#9728;</span>
+        </label>
+      </div>
+    </div>
+    <div class="menu-overlay is-hidden">
+      <div class="menu-container">
+        <img src="./images/logo.svg" alt="Cinemania Logo" class="logo" />
+        <ul class="menu-list">
+          <li><a href="../src/index.html" class="menu-link">Home</a></li>
+          <li><a href="../src/catalog.html" class="menu-link">Catalog</a></li>
+          <li>
+            <a href="../src/my-library.html" class="menu-link">My library</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<script src="./scripts/mobile-menu.js" type="module"></script>

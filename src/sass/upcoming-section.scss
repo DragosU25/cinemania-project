@@ -1,0 +1,156 @@
+.image-container {
+  width: 280px;
+  height: 402px;
+  flex-shrink: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.movie-info {
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: left;
+  max-width: 100%;
+}
+
+.upcoming-movie-title {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.movie-info div {
+  margin-bottom: 10px;
+}
+
+.release-date,
+.votes,
+.popularity,
+.genre {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: var(--Grey, #b7b7b7);
+}
+
+.vote-count,
+.popularity-score,
+.genre-type {
+  font-size: 16px;
+  font-style: normal;
+  color: #fff;
+  font-weight: 500;
+}
+
+.date {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  color: #f87719;
+}
+
+.align-left {
+  text-align: left;
+  width: 100px; /* adjust as needed */
+}
+
+.about h2 {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  color: #b7b7b7;
+}
+
+.about p {
+  font-size: 0.9em;
+}
+
+.add-to-library {
+  padding: 12px 24px;
+  margin-top: 20px;
+  background: linear-gradient(141deg, #ffc226 9.4%, #f84119 91.91%);
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  border-radius: 74px;
+}
+
+.add-to-library:hover {
+  background-color: #e65c00;
+}
+
+.upcoming-movie-details-flex-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (width >= 768px) {
+  .image-container {
+    height: 400px;
+    background-size: 100%;
+  }
+
+  .upcoming-movie-details-container {
+    width: 100%;
+  }
+
+  .movie-info {
+    width: 100% !important;
+  }
+
+  .details {
+    justify-content: space-around;
+  }
+
+  .details div {
+    margin-bottom: 0;
+  }
+
+  .about p {
+    font-size: 1em;
+  }
+
+  .upcoming-movie-title {
+    font-size: 32px;
+  }
+
+  .upcoming-movie-details-flex-container {
+    flex-direction: row;
+    gap: 50px;
+  }
+}
+
+@media (width>=1280px) {
+  .upcoming-movie-container {
+    display: flex;
+    gap: 18px;
+  }
+  .image-container {
+    width: 70%;
+    height: 458px;
+  }
+
+  .movie-info {
+    width: 100% !important;
+  }
+
+  .upcoming-movie-details-flex-container {
+    flex-direction: column;
+    gap: 0;
+  }
+}

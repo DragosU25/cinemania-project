@@ -1,0 +1,40 @@
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.light-mode {
+  color: #000 !important;
+  background-color: #fff;
+}
+
+body {
+  background-color: #000;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: 40px 20px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.link {
+  text-decoration: none;
+}
+
+//light mode

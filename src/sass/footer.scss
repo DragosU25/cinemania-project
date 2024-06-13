@@ -1,0 +1,26 @@
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #b7b7b7;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  padding-bottom: 28px;
+}
+
+.footer-link {
+  color: #b7b7b7;
+}
+
+.linkedin-link {
+  text-decoration: underline !important;
+}
+
+@media (width >= 768px) {
+  .footer-section {
+    flex-direction: row;
+    gap: 5px;
+  }
+}

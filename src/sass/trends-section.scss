@@ -1,0 +1,78 @@
+.week-movie-card {
+  width: 280px;
+  height: 406px;
+  border-radius: 5px;
+  background-size: 100% !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  transition: width 0.3s ease, height 0.3s ease, background-size 0.3s ease; /* Adaugă tranziții */
+}
+
+@media (min-width: 768px) {
+  .week-movie-card {
+    width: 394px;
+    height: 574px;
+  }
+}
+
+.week-trending-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (width >= 768px) {
+  .week-trending-container {
+    gap: 20px;
+  }
+}
+
+.section-flex-container button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #f87719;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.section-flex-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+@media (width>=768px) {
+  .section-flex-container button,
+  .section-title {
+    font-size: 24px;
+  }
+
+  .movie-details-container-content {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+@media (width>=1280px) {
+  .section-flex-container button,
+  .section-title {
+    font-size: 28px;
+  }
+}
