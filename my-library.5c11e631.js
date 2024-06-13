@@ -1,0 +1,2 @@
+const e=document.querySelector(".menu-button"),n=document.querySelector(".menu-overlay"),t=document.querySelector(".menu-container"),i=()=>{n.classList.toggle("is-hidden"),e.style.display=n.classList.contains("is-hidden")?"block":"none"};e.addEventListener("click",(e=>{e.stopPropagation(),i()})),window.addEventListener("click",(s=>{n.classList.contains("is-hidden")||t.contains(s.target)||e.contains(s.target)||i()})),window.addEventListener("resize",(()=>{window.innerWidth>=768&&!n.classList.contains("is-hidden")&&i()}));
+//# sourceMappingURL=my-library.5c11e631.js.map
