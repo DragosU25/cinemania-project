@@ -154,3 +154,17 @@
     gap: 0;
   }
 }
+
+.add-to-library-btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid linear-gradient(141deg, #ffc226 9.4%, #f84119 91.91%);
+  padding: 12px 24px;
+  border-radius: 74px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.add-to-library-btn:hover {
+  background: linear-gradient(141deg, #ffc226 9.4%, #f84119 91.91%);
+}

@@ -19,7 +19,6 @@ const searchMovies = async (query, page = 1) => {
   }
 };
 
-console.log(searchMovies('cars'));
 const getTrendingMovies = async () => {
   try {
     const response = await fetch(

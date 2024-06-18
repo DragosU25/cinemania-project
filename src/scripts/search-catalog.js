@@ -1,17 +1,30 @@
-import { searchMovies, getGenres } from '../scripts/movie-api';
+import {
+  searchMovies,
+  getGenres,
+  getTrendingMovies,
+} from '../scripts/movie-api';
 
 const gallery = document.querySelector('.gallery');
 const searchForm = document.querySelector('form');
 const pagination = document.querySelector('#pagination');
 const message = document.querySelector('#message');
-const yearFilterContainer = document.querySelector('#year-filter-container'); // Container for the year select
+const yearFilterContainer = document.querySelector('#year-filter-container');
+const genreFilterContainer = document.querySelector('#genre-filter-container');
+const currentDate = new Date().toISOString().split('T')[0];
+
+const getMoviesForToday = async () => {
+  const movies = await getTrendingMovies();
+  const todayMovies = movies.filter(movie => movie.release_date <= currentDate);
+  return todayMovies;
+};
 
 let currentPage = 1;
-let currentQuery = 'popular'; // Implicit search query for popular movies
+let currentQuery = 'popular';
 const perPage = 20;
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500'; // Base URL for images
-const LOCAL_PLACEHOLDER_IMAGE = '../images/alternative-image.png'; // Path to local placeholder image
-let allMovies = []; // Store all movies for filtering
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+const LOCAL_PLACEHOLDER_IMAGE = '../images/hero-image.jpg';
+let allMovies = [];
+let allGenres = [];
 
 const renderMovies = async movies => {
   const genres = await getGenres();
@@ -49,9 +62,8 @@ const renderMovies = async movies => {
 
   gallery.innerHTML = movieHTML;
 
-  gallery.addEventListener('click', async e => {
-    const movieElement = e.target.closest('.search-section-movie');
-    if (movieElement) {
+  gallery.querySelectorAll('.search-section-movie').forEach(movieElement => {
+    movieElement.addEventListener('click', async e => {
       const movieId = movieElement.dataset.movieId;
       const movie = movies.find(m => m.id == movieId);
       const movieGenres = movie.genre_ids
@@ -103,8 +115,7 @@ const renderMovies = async movies => {
       movieDetailsContainer.classList.remove('hidden');
 
       // Add event listener for closing the movie details
-      const closeBtn = document.querySelector('.close-btn');
-      closeBtn.addEventListener('click', () => {
+      document.querySelector('.close-btn').addEventListener('click', () => {
         movieDetailsContainer.classList.add('hidden');
       });
 
@@ -116,27 +127,8 @@ const renderMovies = async movies => {
           ? 'Remove from library'
           : 'Add to my library';
       });
-    }
+    });
   });
-
-  // Function to check if a movie is in the library
-  const isInLibrary = movieId => {
-    const library = JSON.parse(localStorage.getItem('library')) || [];
-    return library.some(movie => movie.id == movieId);
-  };
-
-  // Function to toggle a movie in the library
-  const toggleLibrary = movie => {
-    let library = JSON.parse(localStorage.getItem('library')) || [];
-
-    if (isInLibrary(movie.id)) {
-      library = library.filter(item => item.id != movie.id);
-      localStorage.setItem('library', JSON.stringify(library));
-    } else {
-      library.push(movie);
-      localStorage.setItem('library', JSON.stringify(library));
-    }
-  };
 };
 
 const handlePageChange = async page => {
@@ -144,10 +136,11 @@ const handlePageChange = async page => {
 
   try {
     const data = await searchMovies(currentQuery, currentPage);
-    allMovies = data.results; // Store all movies for filtering
+    allMovies = data.results;
     renderMovies(allMovies);
     renderPagination(data.total_pages);
-    renderYearFilter(); // Render the year filter select
+    renderYearFilter();
+    renderGenreFilter(); // Render the genre filter
   } catch (err) {
     console.error(err);
     showMessage('Something went wrong. Please try again.');
@@ -161,12 +154,10 @@ const showMessage = msg => {
 };
 
 const renderPagination = totalPages => {
-  console.log(`Rendering pagination for ${totalPages} pages`); // Debug log
   pagination.innerHTML = '';
 
-  if (totalPages <= 1) return; // Do not display pagination if there's only one page
+  if (totalPages <= 1) return;
 
-  // Add "Previous" button if not on the first page
   if (currentPage > 1) {
     const prevButton = createPaginationButton('<');
     prevButton.addEventListener('click', () =>
@@ -175,23 +166,18 @@ const renderPagination = totalPages => {
     pagination.appendChild(prevButton);
   }
 
-  // Determine the number of pagination buttons to display (max 3)
   const visiblePages = Math.min(3, totalPages);
-
-  // Determine the start and end of pagination button range
   let startPage = currentPage - Math.floor(visiblePages / 2);
   startPage = Math.max(1, startPage);
   let endPage = startPage + visiblePages - 1;
   endPage = Math.min(totalPages, endPage);
 
-  // Add individual page buttons
   for (let i = startPage; i <= endPage; i++) {
     const pageButton = createPaginationButton(i);
     if (i === currentPage) pageButton.classList.add('active');
     pagination.appendChild(pageButton);
   }
 
-  // Add "Next" button if not on the last page
   if (currentPage < totalPages) {
     const nextButton = createPaginationButton('>');
     nextButton.addEventListener('click', () =>
@@ -204,6 +190,7 @@ const renderPagination = totalPages => {
     const pageButton = document.createElement('button');
     pageButton.innerText = label;
     pageButton.classList.add('pagination-button');
+    pageButton.classList.add('light-mode');
     if (label === currentPage) {
       pageButton.classList.add('active');
     }
@@ -216,41 +203,88 @@ const renderPagination = totalPages => {
   }
 };
 
-const handleNextPage = nextPage => {
-  handlePageChange(nextPage);
-};
-
 const renderYearFilter = () => {
-  // Create a select element for the year filter
   const yearSelect = document.createElement('select');
   yearSelect.id = 'year-filter';
+  yearSelect.classList.add('select');
   yearSelect.innerHTML = '<option value="">Year</option>';
 
-  // Add options for years from 2000 to 2024
   for (let year = 2015; year <= 2024; year++) {
     yearSelect.innerHTML += `<option value="${year}">${year}</option>`;
   }
 
-  yearSelect.addEventListener('change', handleYearFilterChange);
-
-  // Append the select element to the container
-  yearFilterContainer.innerHTML = ''; // Clear previous content
+  yearSelect.addEventListener('change', handleFilterChange);
+  yearFilterContainer.innerHTML = '';
   yearFilterContainer.appendChild(yearSelect);
 };
 
-const handleYearFilterChange = event => {
-  const selectedYear = event.target.value;
-  if (!selectedYear) {
-    renderMovies(allMovies); // If no year is selected, show all movies
-  } else {
-    const filteredMovies = allMovies.filter(
+const renderGenreFilter = async () => {
+  const genres = await getGenres();
+  const genreSelect = document.createElement('select');
+  genreSelect.id = 'genre-filter';
+  genreSelect.classList.add('select');
+  genreSelect.innerHTML = '<option value="">Genre</option>';
+
+  Object.keys(genres).forEach(genreId => {
+    genreSelect.innerHTML += `<option value="${genreId}">${genres[genreId]}</option>`;
+  });
+
+  genreSelect.addEventListener('change', handleFilterChange);
+  genreFilterContainer.innerHTML = '';
+  genreFilterContainer.appendChild(genreSelect);
+};
+
+const handleFilterChange = () => {
+  const selectedYear = document.querySelector('#year-filter').value;
+  const selectedGenre = document.querySelector('#genre-filter').value;
+
+  let filteredMovies = allMovies;
+
+  if (selectedYear) {
+    filteredMovies = filteredMovies.filter(
       movie => new Date(movie.release_date).getFullYear() == selectedYear
     );
-    renderMovies(filteredMovies); // Show filtered movies
+  }
+
+  if (selectedGenre) {
+    filteredMovies = filteredMovies.filter(movie =>
+      movie.genre_ids.includes(parseInt(selectedGenre))
+    );
+  }
+
+  renderMovies(filteredMovies);
+};
+
+const isInLibrary = movieId => {
+  const library = JSON.parse(localStorage.getItem('library')) || [];
+  return library.some(movie => movie.id == movieId);
+};
+
+const toggleLibrary = movie => {
+  let library = JSON.parse(localStorage.getItem('library')) || [];
+
+  if (isInLibrary(movie.id)) {
+    library = library.filter(item => item.id != movie.id);
+    localStorage.setItem('library', JSON.stringify(library));
+  } else {
+    library.push(movie);
+    localStorage.setItem('library', JSON.stringify(library));
   }
 };
 
-// Event listener for form submission
+const initialize = async () => {
+  try {
+    const movies = await getMoviesForToday();
+    allMovies = movies;
+    renderMovies(allMovies);
+    renderYearFilter();
+    renderGenreFilter();
+  } catch (err) {
+    console.error(err);
+    showMessage('Something went wrong. Please try again.');
+  }
+};
+
 searchForm.addEventListener('submit', async e => {
   e.preventDefault();
   const searchInputValue = searchForm.searchQuery.value.trim();
@@ -263,8 +297,4 @@ searchForm.addEventListener('submit', async e => {
   await handlePageChange(currentPage);
 });
 
-// Initial rendering
-renderPagination(0);
-
-// Initial search to display first 20 popular movies
-handlePageChange(currentPage);
+initialize();

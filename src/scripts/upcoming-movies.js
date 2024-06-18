@@ -35,14 +35,14 @@ const displayMovieInfo = async () => {
 
   if (randomMovie) {
     let html = `
-      <div class="image-container" style="background-image: url('https://image.tmdb.org/t/p/original${backdropPath}')">
+      <div class="image-container"  style="background-image: url('https://image.tmdb.org/t/p/original${backdropPath}')">
       </div>
       <div class="upcoming-movie-details-container">
       <h2 class="upcoming-movie-title">${randomMovie.title}</h2>
 
        <div class="movie-info">
         <div class="upcoming-movie-details-flex-container">
-        <div class="release-date">
+        <div class="release-date ">
             <span>Release date</span>
             <span class="date align-left">${randomMovie.release_date}</span>
         </div>

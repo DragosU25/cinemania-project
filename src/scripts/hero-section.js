@@ -87,7 +87,9 @@ const displayMovieInfo = async () => {
           </div>
         </div>
         `;
+
         movieDetailsContainer.innerHTML = html;
+
         movieDetailsContainer.classList.remove('is-hidden');
 
         // Adăugare eveniment pentru închiderea detaliilor
