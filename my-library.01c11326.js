@@ -1,0 +1,2 @@
+var toggleInput=document.querySelector(".toggle-input"),lightModeClass=document.querySelectorAll(".light-mode");console.log(lightModeClass),lightModeClass.forEach((function(e){e.classList.remove("light-mode")})),toggleInput.addEventListener("change",(function(e){e.currentTarget.checked?lightModeClass.forEach((function(e){e.classList.add("light-mode")})):lightModeClass.forEach((function(e){e.classList.remove("light-mode")}))}));
+//# sourceMappingURL=my-library.01c11326.js.map
